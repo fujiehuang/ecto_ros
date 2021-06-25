@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import subprocess,sys,os
 source_code='''/* DO NOT EDIT or check into source control
  * Generated code for wrapping a ros message Pub/Sub in ecto
@@ -40,20 +40,20 @@ ECTO_DEFINE_MODULE(ecto_%(msg_pkg)s)
 
 if __name__ == "__main__":
     if len(sys.argv) < 2 or '-h' in sys.argv:
-        print '''Usage: ./gen_msg_wrappers.py <ROS_PACKAGE> or 
-                        ./gen_msg_wrappers.py <ROS_PACKAGE> <MSG_1> <MSG_2> ...'''
+        print('''Usage: ./gen_msg_wrappers.py <ROS_PACKAGE> or 
+                        ./gen_msg_wrappers.py <ROS_PACKAGE> <MSG_1> <MSG_2> ...''')
         sys.exit(1)
     
     msg_pkg = sys.argv[1]
     if len(sys.argv) == 2:
         (o,e) = subprocess.Popen(['rosmsg','package',msg_pkg],stdout=subprocess.PIPE).communicate()
-        msgs = [x.strip() for x in o.split('\n')]
+        msgs = [x.strip() for x in o.decode('utf-8').split('\n')]
     else:
         msgs = sys.argv[2:]
     
     #strip newlines
     filename = 'ecto_%(msg_pkg)s.cpp'%locals()
-    print filename
+    print(filename)
     with open(filename, 'wt') as module_source_code:
         module_source_code.write(module_code%locals())
 
@@ -62,6 +62,6 @@ if __name__ == "__main__":
         msg_pkg = msg.split('/')[0]
         msg_type = msg.split('/')[1]
         filename = 'wrap_%(msg_pkg)s_%(msg_type)s.cpp'%locals()
-        print filename
+        print(filename)
         with open(filename, 'wt') as msg_source_code:
             msg_source_code.write(source_code%locals())
