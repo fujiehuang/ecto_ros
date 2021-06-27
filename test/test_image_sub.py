@@ -2,7 +2,7 @@
 import ecto
 import ecto_ros
 import ecto_ros.ecto_sensor_msgs as ecto_sensor_msgs
-from ecto_ros_test_utils import *
+from .ecto_ros_test_utils import *
 from catkin.find_in_workspaces import find_in_workspaces
 
 ImageSub = ecto_sensor_msgs.Subscriber_Image
@@ -30,10 +30,10 @@ def do_ecto(bagname, msg_counts, Scheduler):
     time.sleep(0.1)
     sched.stop()
 
-    print "expecting RGB count:", msg_counts['/camera/rgb/image_color']
-    print "RGB count:", counter_rgb.outputs.count
-    print "expecting Depth count:", msg_counts['/camera/depth/image']
-    print "Depth count:", counter_depth.outputs.count
+    print("expecting RGB count:", msg_counts['/camera/rgb/image_color'])
+    print("RGB count:", counter_rgb.outputs.count)
+    print("expecting Depth count:", msg_counts['/camera/depth/image'])
+    print("Depth count:", counter_depth.outputs.count)
     assert msg_counts['/camera/rgb/image_color'] >= counter_rgb.outputs.count
     assert msg_counts['/camera/rgb/image_color'] >= counter_depth.outputs.count
     assert counter_rgb.outputs.count != 0

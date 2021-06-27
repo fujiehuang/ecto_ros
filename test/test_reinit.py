@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import ecto
 import ecto_ros, ecto_ros.ecto_sensor_msgs as ecto_sensor_msgs
-from ecto_ros_test_utils import *
+from .ecto_ros_test_utils import *
 import os
 from catkin.find_in_workspaces import find_in_workspaces
 from ecto.opts import run_plasm
@@ -25,8 +25,8 @@ def do_ecto(bagname, msg_counts):
     wait_bag(rosbag)
     sched.stop()
 
-    print "expecting RGB count:", msg_counts['/camera/rgb/image_color']
-    print "RGB count:", counter_rgb.outputs.count
+    print("expecting RGB count:", msg_counts['/camera/rgb/image_color'])
+    print("RGB count:", counter_rgb.outputs.count)
     assert msg_counts['/camera/rgb/image_color'] >= counter_rgb.outputs.count
     assert counter_rgb.outputs.count != 0
     

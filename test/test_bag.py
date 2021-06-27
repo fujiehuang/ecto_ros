@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ecto_ros_test_utils import *
+from .ecto_ros_test_utils import *
 import ecto
 from ecto_ros import BagReader, Image2Mat
 import ecto_ros.ecto_sensor_msgs as ecto_sensor_msgs
@@ -19,7 +19,7 @@ class TestBag(unittest.TestCase):
         counts = bag_counts(bagname)
 
         #test that the counts are the same.
-        print counts
+        print(counts)
         self.assertEqual(counts['/camera/rgb/image_color'], counts['/camera/depth/image'])
         self.assertNotEqual(counts['/camera/rgb/image_color'], 0)
 
@@ -49,9 +49,9 @@ class TestBag(unittest.TestCase):
         #ecto.view_plasm(plasm)
 
         plasm.execute(niter=0)
-        print "expecting count:", counts['/camera/rgb/image_color']
-        print "RGB count:", counter_rgb.outputs.count
-        print "Depth count:", counter_depth.outputs.count
+        print("expecting count:", counts['/camera/rgb/image_color'])
+        print("RGB count:", counter_rgb.outputs.count)
+        print("Depth count:", counter_depth.outputs.count)
         assert counts['/camera/rgb/image_color'] == counter_rgb.outputs.count
         assert counts['/camera/depth/image'] == counter_depth.outputs.count
 

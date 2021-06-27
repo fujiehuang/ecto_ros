@@ -9,7 +9,7 @@ def bag_counts(bagname):
     stdout,stderr = proc.communicate()
     #should exit without error
     if len(stderr) != 0:
-        print stderr
+        print(stderr)
         sys.exit(-1)
     result = yaml.load(stdout)
     counts = {}
@@ -33,6 +33,6 @@ def wait_bag(rosbag):
     stdout,stderr = rosbag.communicate()
     #should exit without error
     if len(stderr) != 0:
-        print stderr
+        print(stderr)
         sys.exit(-1)
     time.sleep(1.0)
