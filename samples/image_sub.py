@@ -9,8 +9,8 @@ ImageSub = ecto_sensor_msgs.Subscriber_Image
 CameraInfoSub = ecto_sensor_msgs.Subscriber_CameraInfo
 
 def do_ecto():
-    sub_rgb = ImageSub("image_sub",topic_name='/camera/rgb/image_mono')
-    sub_depth = ImageSub("depth_sub",topic_name='/camera/depth/image')
+    sub_rgb = ImageSub("image_sub",topic_name='/camera/color/image_raw')
+    sub_depth = ImageSub("depth_sub",topic_name='/camera/depth/image_rect_raw')
 
     im2mat_rgb = ecto_ros.Image2Mat()
     im2mat_depth = ecto_ros.Image2Mat()

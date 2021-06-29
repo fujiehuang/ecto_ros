@@ -7,8 +7,8 @@ ImageSub = ecto_sensor_msgs.Subscriber_Image
 
 def do_ecto():
     #Set up the ecto_ros subscribers, with a dict of output name -> subscriber cell
-    subs = dict(image=ImageSub(topic_name='image',queue_size=0),
-                depth=ImageSub(topic_name='depth',queue_size=0),
+    subs = dict(image=ImageSub(topic_name='/camera/color/image_raw',queue_size=2),
+                depth=ImageSub(topic_name='/camera/depth/image_rect_raw',queue_size=2),
                 )
     #The synchronizer expects this dict, and will have an output foreach key:value pair
     sync = ecto_ros.Synchronizer('Synchronizator', subs=subs)
@@ -28,6 +28,7 @@ def do_ecto():
     #add the graph to our ecto plasm
     plasm = ecto.Plasm()
     plasm.connect(graph)
+    ecto.view_plasm(plasm)
 
     #We'll use a threadpool based scheduler to execute this one.
     sched = ecto.Scheduler(plasm)
